@@ -32,19 +32,23 @@
                 <div id="signCard">
                     <img src={sign.image} alt={sign.name}/>
                     <h1>{sign.name}</h1>
-                    <h2>Notes: {sign.notes}</h2>
+                    {#if sign.notes != false}
+                        <h2>Notes: {sign.notes}</h2>
+                    {/if}
                     <h4>Created: {sign.date}</h4>
                     <button on:click={destroy(sign)}>Delete</button>
                     <button on:click={select(sign)}>Edit</button>
 
                     {#if showUpdateForm}
+                        {#if sign.id = showUpdateForm}    
                         <form on:submit={handleUpdateSubmit}>
-                            <input type="text" placeholder="Image Address" bind:value={image}/>
-                            <input type="test" placeholder="Name of Sign" bind:value={name}/>
-                            <input type="text"  placeholder="Notes" bind:value={notes}/>
-                            <button>Save</button>
-                            <button on:click={reset(sign)}>Cancel</button>
-                        </form>
+                                <input type="text" placeholder="Image Address" bind:value={image}/>
+                                <input type="test" placeholder="Name of Sign" bind:value={name}/>
+                                <input type="text"  placeholder="Notes" bind:value={notes}/>
+                                <button>Save</button>
+                                <button on:click={reset(sign)}>Cancel</button>
+                            </form>
+                        {/if}
                     {/if}
                 </div>
             </li>

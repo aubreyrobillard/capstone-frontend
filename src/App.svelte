@@ -5,7 +5,7 @@
 
   const url = 'https://capstoneback-z300.onrender.com/signs/'
 
-  // Set state components
+  /////////// Set state components /////////////////////////////////////////////////////
     let id = ""  
     let image = ""
     let name = ""
@@ -99,35 +99,35 @@
 </script>
 
 <main>
+
   <h1>ASLex</h1>
   <button on:click={toggleCreateForm}>Add Sign</button>
   
   {#if showCreateForm}
-  <Form
-    image={image}
-    action={action}
-    name={name}
-    date={date}
-    notes={notes}
-    create={createSign}
-  />
-{/if}
+    <Form
+      image={image}
+      action={action}
+      name={name}
+      date={date}
+      notes={notes}
+      create={createSign}
+    />
+  {/if}
   
-  <Display
-    signs={signs}
-    image={image}
-    action={action}
-    name={name}
-    date={date}
-    notes={notes}
-    update={updateSign}
-    select={selectSign}
-    showUpdateForm={showUpdateForm}
-    id={id}
-    destroy={deleteSign}
-    reset={resetState}
-    
-  />
+    <Display
+      signs={signs}
+      image={image}
+      action={action}
+      name={name}
+      date={date}
+      notes={notes}
+      update={updateSign}
+      select={selectSign}
+      showUpdateForm={showUpdateForm}
+      id={id}
+      destroy={deleteSign}
+      reset={resetState}
+    />
 
 </main>
 
