@@ -15,17 +15,19 @@
     let signs = []
     let showCreateForm = false
     let showUpdateForm = false
+    let showDetails = false
 
 
   ///FUNCTIONS///////////////////////////////////////////////////////////////////////////
 
   //TOGGLE FORMS
+
     const toggleCreateForm = () => {
       showCreateForm = !showCreateForm
     }
 
     const toggleUpdateForm = () => {
-      showUpdateForm = !showUpdateForm
+      showUpdateForm = true;
     }
   
   //RESET STATE
@@ -38,6 +40,7 @@
       action = 'create'
       showCreateForm = false
       showUpdateForm = false
+      showDetails = false
     }
 
   //GET ALL SIGNS
@@ -61,7 +64,7 @@
 
     //SELECT A SIGN TO UPDATE
       const selectSign = async (sign) => {
-        showUpdateForm = true
+        toggleUpdateForm()
         id = sign.id
         image = sign.image
         name = sign.name
@@ -101,7 +104,9 @@
 <main>
 
   <h1>ASLex</h1>
-  <button on:click={toggleCreateForm}>Add Sign</button>
+  <div id='mainButton'>
+    <button on:click={toggleCreateForm}>Add Sign</button>
+  </div>
   
   {#if showCreateForm}
     <Form
@@ -123,10 +128,10 @@
       notes={notes}
       update={updateSign}
       select={selectSign}
-      showUpdateForm={showUpdateForm}
       id={id}
       destroy={deleteSign}
       reset={resetState}
+      showUpdateForm={showUpdateForm}
     />
 
 </main>

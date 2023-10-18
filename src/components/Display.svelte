@@ -7,16 +7,13 @@
     export let update
     export let action
     export let select
-    export let showUpdateForm
     export let id
     export let destroy
     export let reset
+    export let showUpdateForm
 
 
     const handleUpdateSubmit = (event) => {
-        
-        event.preventDefault()
-
         if(action === 'update'){
             console.log("update a sign")
             update({image, name, date, notes, id})
@@ -28,30 +25,43 @@
 <div>
     <ul>
         {#each signs as sign}
-            <li>
-                <div id="signCard">
-                    <img src={sign.image} alt={sign.name}/>
-                    <h1>{sign.name}</h1>
-                    {#if sign.notes != false}
-                        <h2>Notes: {sign.notes}</h2>
-                    {/if}
-                    <h4>Created: {sign.date}</h4>
-                    <button on:click={destroy(sign)}>Delete</button>
-                    <button on:click={select(sign)}>Edit</button>
+            
+            <div id="signCard">
+                <li>
+                    
+                    <div id="imgContainer">
+                        <img src={sign.image} alt={sign.name}/>
+                    </div>
 
-                    {#if showUpdateForm}
-                        {#if sign.id = showUpdateForm}    
-                        <form on:submit={handleUpdateSubmit}>
-                                <input type="text" placeholder="Image Address" bind:value={image}/>
-                                <input type="test" placeholder="Name of Sign" bind:value={name}/>
-                                <input type="text"  placeholder="Notes" bind:value={notes}/>
-                                <button>Save</button>
-                                <button on:click={reset(sign)}>Cancel</button>
-                            </form>
+                    <div id="cardDetails">
+                        <h2>"{sign.name}"</h2>
+                        {#if sign.notes != false}
+                            <h3>Notes: {sign.notes}</h3>
                         {/if}
+                        <h4>Created: {sign.date}</h4>
+                    </div>
+
+                    <div id='delete-edit-buttons'>
+                        <div id='deleteButton'><button on:click={destroy(sign)}>Delete</button></div>
+                        <button on:click={select(sign)}>Edit</button>
+                    </div>
+
+                    {#if showUpdateForm}    
+                        <div id="updateForm"> 
+                            <form on:submit|preventDefault={handleUpdateSubmit}>
+                                <input type="text" placeholder="Image Address" name="image" bind:value={image}/>
+                                <input type="test" placeholder="Name of Sign" name="name" bind:value={name}/>
+                                <textarea placeholder="Notes" name="notes" bind:value={notes}/>
+                                <div id="save-cancel-buttons">
+                                    <button>Save</button>
+                                    <button on:click={reset(sign)}>Cancel</button>
+                                </div>
+                            </form>
+                        </div>   
                     {/if}
-                </div>
-            </li>
+
+                </li>
+            </div>
         {/each}
     </ul>
 
